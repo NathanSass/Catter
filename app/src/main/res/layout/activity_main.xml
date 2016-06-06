@@ -10,8 +10,34 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.nathansass.todoapp.MainActivity">
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:id="@+id/lvItems"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/btnAddItem"/>
+
+    <Button
+        android:onClick="onAddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/btnAddItem"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etEditText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/btnAddItem"
+        android:layout_toStartOf="@+id/btnAddItem"
+        android:inputType="text"
+        android:hint="@string/addItem"/>
 </RelativeLayout>
