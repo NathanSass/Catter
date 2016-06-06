@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,22 +20,20 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+    private final int REQUEST_CODE = 20;
 
     Context context;
     int duration;
-
-    Intent intent;
 
     ArrayList<String> todoItems;
     ArrayAdapter<String> aToDoAdapter;
     ListView lvItems;
     EditText etEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        intent = this.getIntent();
 
         /* Toast Things*/
         context = getApplicationContext();
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(context, EditItemActivity.class);
                 i.putExtra("position", position);
                 i.putExtra("itemTitle", todoItems.get(position));
-                startActivity(i);
+                startActivityForResult(i, REQUEST_CODE);
             }
         });
     }
@@ -89,20 +86,12 @@ public class MainActivity extends AppCompatActivity {
         try {
             FileUtils.writeLines(file, todoItems);
         } catch (IOException e) {
-            Toast.makeText(context, "There was an error saving to do items", duration);
+            Toast.makeText(context, "There was an error saving to do items", duration).show();
         }
     }
+
     public void populateArrayItems() {
         readItems();
-
-        int position = intent.getIntExtra("position", -1);
-        if (position >= 0) { // Update the array here, is there a better way to check if there is a valid intent
-            String todoContent = intent.getStringExtra("itemTitle");
-
-            Log.v(TAG, intent.toString());
-            todoItems.set(position, todoContent);
-            writeItems();
-        }
         aToDoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, todoItems);
     }
 
@@ -110,5 +99,22 @@ public class MainActivity extends AppCompatActivity {
         aToDoAdapter.add(etEditText.getText().toString());
         etEditText.setText("");
         writeItems();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+
+            int position = data.getIntExtra("position", -1);
+            String todoContent = data.getStringExtra("itemTitle");
+
+            todoItems.set(position, todoContent);
+
+            aToDoAdapter.notifyDataSetChanged();
+            writeItems();
+
+        }
     }
 }

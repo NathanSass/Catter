@@ -34,7 +34,6 @@ public class EditItemActivity extends AppCompatActivity {
         etItemTitle = (EditText) findViewById(R.id.etItemTitle);
 
         updateUI();
-//        Toast.makeText(context, position + ". " + todoContent, duration).show();
     }
 
     public void updateUI() {
@@ -45,6 +44,7 @@ public class EditItemActivity extends AppCompatActivity {
         Intent i = new Intent(context, MainActivity.class);
         i.putExtra("position", position);
         i.putExtra("itemTitle", etItemTitle.getText().toString());
-        startActivity(i);
+        setResult(RESULT_OK, i);
+        finish();
     }
 }
