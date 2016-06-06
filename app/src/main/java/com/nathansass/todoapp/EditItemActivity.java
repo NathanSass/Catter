@@ -1,6 +1,7 @@
 package com.nathansass.todoapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -27,13 +28,13 @@ public class EditItemActivity extends AppCompatActivity {
 
         /* Get intent */
         position = getIntent().getIntExtra("position", -1);
-        todoContent = getIntent().getStringExtra("content");
+        todoContent = getIntent().getStringExtra("itemTitle");
 
         /* UI Elements */
         etItemTitle = (EditText) findViewById(R.id.etItemTitle);
 
         updateUI();
-        Toast.makeText(context, position + ". " + todoContent, duration).show();
+//        Toast.makeText(context, position + ". " + todoContent, duration).show();
     }
 
     public void updateUI() {
@@ -41,6 +42,9 @@ public class EditItemActivity extends AppCompatActivity {
     }
 
     public void onUpdateItem(View view) {
-        this.finish();
+        Intent i = new Intent(context, MainActivity.class);
+        i.putExtra("position", position);
+        i.putExtra("itemTitle", etItemTitle.getText().toString());
+        startActivity(i);
     }
 }
