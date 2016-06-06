@@ -36,10 +36,12 @@ public class MainActivity extends AppCompatActivity {
         duration = Toast.LENGTH_SHORT;
 
         populateArrayItems();
+
         lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(aToDoAdapter);
-
         etEditText = (EditText) findViewById(R.id.etEditText);
+
+
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -86,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
     public void populateArrayItems() {
         readItems();
         aToDoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, todoItems);
-
     }
 
     public void onAddItem(View view) {
