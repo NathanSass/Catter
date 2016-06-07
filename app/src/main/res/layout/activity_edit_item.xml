@@ -38,5 +38,6 @@
         android:text="@string/update"
         android:id="@+id/button"
         android:layout_below="@+id/etItemTitle"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:background="@color/ColorPositiveGreen"/>
 </RelativeLayout>

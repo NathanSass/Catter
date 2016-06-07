@@ -3,6 +3,7 @@ package com.nathansass.todoapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* Adds image to Appbar*/
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.catty_icon);
 
         /* Toast Things*/
         context = getApplicationContext();
@@ -96,9 +102,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAddItem(View view) {
-        aToDoAdapter.add(etEditText.getText().toString());
-        etEditText.setText("");
-        writeItems();
+        String newItem = etEditText.getText().toString();
+        if (newItem.length() > 0) { // validation for new items
+            aToDoAdapter.add(etEditText.getText().toString());
+            etEditText.setText("");
+            writeItems();
+        }
     }
 
     @Override

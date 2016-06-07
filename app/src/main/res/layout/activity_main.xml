@@ -9,25 +9,33 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.nathansass.todoapp.MainActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tvLabel"
+        android:id="@+id/textViewLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lvItems"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/btnAddItem"/>
+        android:layout_below="@+id/textViewLabel"
+        android:layout_above="@+id/etEditText"
+        android:layout_alignParentLeft="true"/>
 
     <Button
         android:onClick="onAddItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="@string/addTask"
         android:id="@+id/btnAddItem"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:background="@color/ColorPositiveGreen"/>
 
     <EditText
         android:layout_width="wrap_content"
