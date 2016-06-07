@@ -26,6 +26,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] Basic error handling and validation for new inputs
+* [x] Splash screen on startup
 
 ## Video Walkthrough 
 
