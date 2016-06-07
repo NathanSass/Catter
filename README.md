@@ -40,6 +40,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 - I accidently commented out the setContentView call. That was kind of fun, took me a short while to figure out.
 - Is there a way to send whole data objects in an intent? Seems kind of long to have to send each data point by data point.
 - When dealing with intents and starting new activities, is there a way to persist some information in memory? I had to pass the item index back and forth even though it is something that I would not want to edit in the edit activity.
+- Do I have to copy the chunk of code that adds the image to the app bar to every activity? What is the best pattern to share code between activities?
 
 ## License
 
