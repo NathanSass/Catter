@@ -12,23 +12,23 @@ import java.util.ArrayList;
 /**
  * Created by nathansass on 6/8/16.
  */
-public class CustomTodoAdapter extends ArrayAdapter {
+public class CustomTodoAdapter extends ArrayAdapter<Todo> {
     public static final String TAG = CustomTodoAdapter.class.getSimpleName();
 
-    public CustomTodoAdapter(Context context, ArrayList<String> todoArr) {
+    public CustomTodoAdapter(Context context, ArrayList<Todo> todoArr) {
         super(context, 0, todoArr);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        String todoTitle = (String) getItem(position);
+        Todo todo = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.todo_item, parent, false);
         }
 
         TextView tvTodoTitle = (TextView) convertView.findViewById(R.id.todoTitle);
 
-        tvTodoTitle.setText(todoTitle);
+        tvTodoTitle.setText(todo.title);
 
         return convertView;
     }
