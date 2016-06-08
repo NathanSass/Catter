@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,9 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     Context context;
     int duration;
-
+    CustomTodoAdapter todoAdapter;
     ArrayList<String> todoItems;
-    ArrayAdapter<String> aToDoAdapter;
     ListView lvItems;
     EditText etEditText;
 
@@ -47,17 +45,18 @@ public class MainActivity extends AppCompatActivity {
 
         populateArrayItems();
 
+        todoAdapter = new CustomTodoAdapter(this, todoItems);
         lvItems = (ListView) findViewById(R.id.lvItems);
-        lvItems.setAdapter(aToDoAdapter);
+        lvItems.setAdapter(todoAdapter);
+
         etEditText = (EditText) findViewById(R.id.etEditText);
 
 
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
                 todoItems.remove(position);
-                aToDoAdapter.notifyDataSetChanged();
+                todoAdapter.notifyDataSetChanged();
                 writeItems();
                 return true;
             }
@@ -98,13 +97,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void populateArrayItems() {
         readItems();
-        aToDoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, todoItems);
     }
 
     public void onAddItem(View view) {
         String newItem = etEditText.getText().toString();
         if (newItem.length() > 0) { // validation for new items
-            aToDoAdapter.add(etEditText.getText().toString());
+            todoAdapter.add(etEditText.getText().toString());
             etEditText.setText("");
             writeItems();
         }
@@ -121,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
             todoItems.set(position, todoContent);
 
-            aToDoAdapter.notifyDataSetChanged();
+            todoAdapter.notifyDataSetChanged();
             writeItems();
 
         }
