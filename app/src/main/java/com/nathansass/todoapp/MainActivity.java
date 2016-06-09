@@ -11,10 +11,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.apache.commons.io.FileUtils;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,15 +45,17 @@ public class MainActivity extends AppCompatActivity {
         lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(todoAdapter);
 
+        /* UI Elements*/
         etEditText = (EditText) findViewById(R.id.etEditText);
 
-
+        /* Click listeners */
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Todo todo = todoArr.get(position);
                 todoArr.remove(position);
                 todoAdapter.notifyDataSetChanged();
-                writeItems();
+                todo.delete();
                 return true;
             }
         });
@@ -74,48 +72,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void readItems() {
-        File filesDir = getFilesDir();
-        File file = new File(filesDir, "todo.txt");
-        todoArr = new ArrayList<>();
-        try {
-            ArrayList<String> todoItems = new ArrayList<>(FileUtils.readLines(file)); // best way to avoid this duplication
-            for (int i = 0; i < todoItems.size(); i++) {
-                String currentTitle = todoItems.get(i);
-                todoArr.add(new Todo(currentTitle));
-            }
-        } catch (IOException e) {
-            todoArr.add(new Todo("Unable to load existing todo items"));
-        }
-    }
-
-    public void writeItems() {
-        File filesDir = getFilesDir();
-        File file = new File(filesDir, "todo.txt");
-        try {
-            ArrayList<String> arrToWrite = new ArrayList<>(); //BUGBUG: Not pretty
-
-            for (int i = 0; i < todoArr.size(); i++) {
-                String todoTitle = todoArr.get(i).title;
-                arrToWrite.add(todoTitle);
-            }
-
-            FileUtils.writeLines(file, arrToWrite);
-        } catch (IOException e) {
-            Toast.makeText(context, "There was an error saving to do items", duration).show();
-        }
-    }
-
     public void populateArrayItems() {
-        readItems();
+        todoArr = (ArrayList<Todo>) Todo.getAll();
     }
 
     public void onAddItem(View view) {
-        String newItem = etEditText.getText().toString();
-        if (newItem.length() > 0) { // validation for new items
-            todoAdapter.add(new Todo(etEditText.getText().toString()));
+        String todoTitle = etEditText.getText().toString();
+
+        if (todoTitle.length() > 0) { // validation for new items
+            Todo newTodo = new Todo();
+            newTodo.title = todoTitle;
+            newTodo.save();
+            todoAdapter.add(newTodo);
             etEditText.setText("");
-            writeItems();
         }
     }
 
@@ -124,15 +93,15 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-
+            String todoTitle = data.getStringExtra("itemTitle");
             int position = data.getIntExtra("position", -1);
-            String todoContent = data.getStringExtra("itemTitle");
-            Todo updatedTodo = new Todo(todoContent);
-            todoArr.set(position, updatedTodo);
 
+            Todo todo = todoArr.get(position);
+            todo.title = todoTitle;
+
+            todoArr.set(position, todo);
             todoAdapter.notifyDataSetChanged();
-            writeItems();
-
+            todo.save();
         }
     }
 }
