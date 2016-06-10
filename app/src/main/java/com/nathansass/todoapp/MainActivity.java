@@ -1,7 +1,6 @@
 package com.nathansass.todoapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
@@ -69,12 +68,6 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
                 todo.position = position;
                 showAlertDialog(todo);
 
-
-
-//                Intent i = new Intent(context, EditItemActivity.class);
-//                i.putExtra("position", position);
-//                i.putExtra("itemTitle", todoArr.get(position).title);
-//                startActivityForResult(i, REQUEST_CODE);
             }
         });
     }
@@ -101,24 +94,6 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
         dialog.show(fm, "fragment_alert");
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            String todoTitle = data.getStringExtra("itemTitle");
-            int position = data.getIntExtra("position", -1);
-
-            Todo todo = todoArr.get(position);
-            todo.title = todoTitle;
-
-            todoArr.set(position, todo);
-            todoAdapter.notifyDataSetChanged();
-            todo.save();
-        }
-    }
-
     @Override
     public void onDialogMessage(Todo newTodo) {
         Todo todo = todoArr.get(newTodo.position);
@@ -129,4 +104,22 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
 
         todo.save();
     }
+
+    /* Deprecated */
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+//            String todoTitle = data.getStringExtra("itemTitle");
+//            int position = data.getIntExtra("position", -1);
+//
+//            Todo todo = todoArr.get(position);
+//            todo.title = todoTitle;
+//
+//            todoArr.set(position, todo);
+//            todoAdapter.notifyDataSetChanged();
+//            todo.save();
+//        }
+//    }
 }

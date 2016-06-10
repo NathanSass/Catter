@@ -10,15 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-
+/* Deprecated */
 public class EditTodoDialogFragment extends DialogFragment implements View.OnClickListener {
 
     Context context;
     int duration;
 
     Todo todo;
-
-    int position;
 
     EditText etItemTitle;
     Button btnSubmitEdits;
