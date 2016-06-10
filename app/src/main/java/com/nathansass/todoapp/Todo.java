@@ -17,9 +17,12 @@ public class Todo extends Model {
     @Column(name = "Name")
     String title;
 
-    public Todo(String title){
+    int position;
+
+    public Todo(String title, int position){
         super();
         this.title = title;
+        this.position = position;
     }
 
     public Todo() {
@@ -29,7 +32,7 @@ public class Todo extends Model {
     public static List<Todo> getAll() {
         return new Select()
                 .from(Todo.class)
-                .orderBy("Name ASC")
+//                .orderBy("Name ASC")
                 .execute();
     }
 }

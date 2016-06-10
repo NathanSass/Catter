@@ -3,6 +3,7 @@ package com.nathansass.todoapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EditTodoDialogFragment.Communicator{
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private final int REQUEST_CODE = 20;
@@ -64,10 +65,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent i = new Intent(context, EditItemActivity.class);
-                i.putExtra("position", position);
-                i.putExtra("itemTitle", todoArr.get(position).title);
-                startActivityForResult(i, REQUEST_CODE);
+                Todo todo = todoArr.get(position);
+                todo.position = position;
+                showAlertDialog(todo);
+
+
+
+//                Intent i = new Intent(context, EditItemActivity.class);
+//                i.putExtra("position", position);
+//                i.putExtra("itemTitle", todoArr.get(position).title);
+//                startActivityForResult(i, REQUEST_CODE);
             }
         });
     }
@@ -88,6 +95,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showAlertDialog(Todo todo) {
+        FragmentManager fm = getSupportFragmentManager();
+        EditTodoDialogFragment dialog = EditTodoDialogFragment.newInstance(todo);
+        dialog.show(fm, "fragment_alert");
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -103,5 +117,16 @@ public class MainActivity extends AppCompatActivity {
             todoAdapter.notifyDataSetChanged();
             todo.save();
         }
+    }
+
+    @Override
+    public void onDialogMessage(Todo newTodo) {
+        Todo todo = todoArr.get(newTodo.position);
+        todo.title = newTodo.title;
+
+        todoArr.set(newTodo.position, todo);
+        todoAdapter.notifyDataSetChanged();
+
+        todo.save();
     }
 }
