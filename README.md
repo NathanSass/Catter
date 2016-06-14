@@ -4,7 +4,7 @@
 
 Submitted by: **Nathan Sass**
 
-Time spent: **13** hours spent in total
+Time spent: **20** hours spent in total
 
 ## User Stories
 
@@ -18,8 +18,8 @@ The following **optional** features are implemented:
 
 * [x] Persist the todo items [into SQLite](http://guides.codepath.com/android/Persisting-Data-to-the-Device#sqlite) instead of a text file
 * [x] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
-* [ ] Add support for completion due dates for todo items (and display within listview item)
-* [ ] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
+* [x] Add support for completion due dates for todo items (and display within listview item) - WIP
+* [x] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
 * [ ] Add support for selecting the priority of each todo item (and display in listview item)
 * [x] Tweak the style improving the UI / UX, play with colors, images or backgrounds
 
@@ -41,6 +41,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 - Is there a way to send whole data objects in an intent? Seems kind of long to have to send each data point by data point.
 - When dealing with intents and starting new activities, is there a way to persist some information in memory? I had to pass the item index back and forth even though it is something that I would not want to edit in the edit activity.
 - Do I have to copy the chunk of code that adds the image to the app bar to every activity? What is the best pattern to share code between activities?
+- Communication with fragments, between activity and communication between nested fragments. Interfaces? Other ideas.
 
 ## License
 

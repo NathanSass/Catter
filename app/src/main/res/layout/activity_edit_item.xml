@@ -32,13 +32,33 @@
         android:layout_alignParentEnd="true"
         android:inputType="text"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/etItemTitle"
+        android:text="@string/addBday"
+        android:id="@+id/tvAddBirthday"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etAddBday"
+        android:layout_below="@+id/tvAddBirthday"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:inputType="text"/>
+
     <Button
         android:onClick="onUpdateItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/update"
         android:id="@+id/button"
-        android:layout_below="@+id/etItemTitle"
+        android:layout_below="@+id/etAddBday"
         android:layout_centerHorizontal="true"
         android:background="@color/ColorPositiveGreen"/>
 </RelativeLayout>

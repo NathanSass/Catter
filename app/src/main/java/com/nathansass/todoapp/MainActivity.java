@@ -13,10 +13,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements EditTodoDialogFragment.Communicator{
+public class MainActivity extends AppCompatActivity implements EditTodoDialogFragment.Communicator, SelectDateFragment.Communicator {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private final int REQUEST_CODE = 20;
+
+    EditTodoDialogFragment editTodoDialogFragment;
 
     Context context;
     int duration;
@@ -90,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
 
     private void showAlertDialog(Todo todo) {
         FragmentManager fm = getSupportFragmentManager();
-        EditTodoDialogFragment dialog = EditTodoDialogFragment.newInstance(todo);
-        dialog.show(fm, "fragment_alert");
+        editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo);
+        editTodoDialogFragment.show(fm, "edit_todo_dialog_fragment");
     }
 
     @Override
@@ -104,6 +106,13 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
 
         todo.save();
     }
+
+    @Override
+    public void onDateSelected(int year, int month, int day) {
+        editTodoDialogFragment.showDate(year, month, day);
+    }
+
+
 
     /* Deprecated */
 //    @Override

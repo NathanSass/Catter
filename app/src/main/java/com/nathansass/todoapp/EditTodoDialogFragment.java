@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-/* Deprecated */
+import java.util.Calendar;
+
+
 public class EditTodoDialogFragment extends DialogFragment implements View.OnClickListener {
 
     Context context;
@@ -18,10 +20,13 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
     Todo todo;
 
-    EditText etItemTitle;
+    EditText etItemTitle, etAddBday;
     Button btnSubmitEdits;
 
     Communicator communicator;
+
+    private Calendar calendar;
+    private int year, month, day;
 
     public EditTodoDialogFragment() {
 
@@ -53,14 +58,59 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
         /* Get UI elements */
         etItemTitle = (EditText) view.findViewById(R.id.etItemTitle);
+        etAddBday = (EditText) view.findViewById(R.id.etAddBday);
         btnSubmitEdits = (Button) view.findViewById(R.id.btnSubmitEdits);
+
+        /* Datepicker */
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
 
         /* Update UI */
         etItemTitle.append(todo.title);
 
+        showDate(year, month, day);
+
+        showDatepickerOnFocus();
+
         btnSubmitEdits.setOnClickListener(this);
 
         return view;
+    }
+
+    public void showDatepickerOnFocus() {
+
+        etAddBday.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    showPickerDialog();
+
+                }
+            }
+        });
+
+        etAddBday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(getActivity(), "Clicked2", Toast.LENGTH_LONG).show();
+                showPickerDialog();
+            }
+        });
+    }
+
+    public void showPickerDialog() {
+        SelectDateFragment newFragment = new SelectDateFragment();
+        newFragment.show(this.getFragmentManager(), "DatePicker");
+    }
+
+
+
+
+    public void showDate(int year, int month, int day) {
+        etAddBday.setText(new StringBuilder().append(month + 1).append("/")
+                .append(day).append("/").append(year));
     }
 
     @Override
@@ -73,6 +123,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
             dismiss();
         }
     }
+
 
     interface Communicator {
         void onDialogMessage (Todo todo);

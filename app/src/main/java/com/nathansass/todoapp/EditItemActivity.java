@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/* Deprecated */
 public class EditItemActivity extends AppCompatActivity {
     Context context;
     int duration;
