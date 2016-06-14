@@ -13,16 +13,22 @@ import java.util.List;
 
 @Table(name = "Todos")
 public class Todo extends Model {
+    public static final String TAG =Todo.class.getSimpleName();
 
     @Column(name = "Name")
     String title;
 
+    @Column(name = "Birthday")
+    long birthDay;
+
     int position;
 
-    public Todo(String title, int position){
+    public Todo(String title, int position, long birthDay){
         super();
         this.title = title;
         this.position = position;
+        this.birthDay = birthDay;
+
     }
 
     public Todo() {

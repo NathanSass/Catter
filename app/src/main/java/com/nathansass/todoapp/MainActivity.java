@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
 
                 Todo todo = todoArr.get(position);
                 todo.position = position;
-                showAlertDialog(todo);
+                showTodoEditDialog(todo);
 
             }
         });
@@ -84,13 +84,14 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
         if (todoTitle.length() > 0) { // validation for new items
             Todo newTodo = new Todo();
             newTodo.title = todoTitle;
+            newTodo.birthDay = System.currentTimeMillis();
             newTodo.save();
             todoAdapter.add(newTodo);
             etEditText.setText("");
         }
     }
 
-    private void showAlertDialog(Todo todo) {
+    private void showTodoEditDialog(Todo todo) {
         FragmentManager fm = getSupportFragmentManager();
         editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo);
         editTodoDialogFragment.show(fm, "edit_todo_dialog_fragment");
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
     public void onDialogMessage(Todo newTodo) {
         Todo todo = todoArr.get(newTodo.position);
         todo.title = newTodo.title;
+        todo.birthDay = newTodo.birthDay;
 
         todoArr.set(newTodo.position, todo);
         todoAdapter.notifyDataSetChanged();

@@ -37,6 +37,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         Bundle args = new Bundle();
         args.putString("title", todo.title);
         args.putInt("position", todo.position);
+        args.putLong("birthDay", todo.birthDay);
         frag.setArguments(args);
         return frag;
     }
@@ -55,6 +56,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         todo = new Todo();
         todo.title = getArguments().getString("title");
         todo.position = getArguments().getInt("position");
+        todo.birthDay = getArguments().getLong("birthDay");
 
         /* Get UI elements */
         etItemTitle = (EditText) view.findViewById(R.id.etItemTitle);
@@ -63,6 +65,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
         /* Datepicker */
         calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(todo.birthDay);
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -109,6 +112,11 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
 
     public void showDate(int year, int month, int day) {
+        /* updates value of todoItem here, gets sent automatically when onclick is called*/
+        calendar.set(year, month, day);
+        long bDay = calendar.getTimeInMillis();
+        todo.birthDay = bDay;
+
         etAddBday.setText(new StringBuilder().append(month + 1).append("/")
                 .append(day).append("/").append(year));
     }
