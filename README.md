@@ -32,7 +32,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
-![](http://i.giphy.com/l46C9GzAXRjUxlcSk.gif)
+![](http://i.giphy.com/3o72FiKv7pKzmZDz3y.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
