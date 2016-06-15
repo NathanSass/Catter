@@ -108,9 +108,6 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         newFragment.show(this.getFragmentManager(), "DatePicker");
     }
 
-
-
-
     public void showDate(int year, int month, int day) {
         /* updates value of todoItem here, gets sent automatically when onclick is called*/
         calendar.set(year, month, day);
@@ -131,7 +128,6 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
             dismiss();
         }
     }
-
 
     interface Communicator {
         void onDialogMessage (Todo todo);

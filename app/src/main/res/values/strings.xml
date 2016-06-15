@@ -2,13 +2,14 @@
     <string name="app_name">Catter</string>
     <string name="add">Add</string>
     <string name="addItem">Add a new cat…</string>
-    <string name="editItem">Edit Cat:</string>
+    <string name="editItem">Name:</string>
     <string name="update">Update</string>
     <string name="addTask">Add Cat</string>
-    <string name="tvLabel">Cat Roster</string>
+    <string name="tvLabel">Cat Roster:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="addBday">Add Birthday:</string>
+    <string name="addBday">Birthday:</string>
     <string name="birthday">Birthday:</string>
+    <string name="editModalTitle">Edit Cat:</string>
 </resources>
