@@ -28,6 +28,7 @@ The following **additional** features are implemented:
 * [x] Basic error handling and validation for new inputs
 * [x] Splash screen on startup
 * [x] Background image for main activity
+* [ ] Makes a network call to the flickr api in order to use images of cats. WIP
 
 ## Video Walkthrough 
 

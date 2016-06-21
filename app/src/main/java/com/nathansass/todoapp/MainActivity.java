@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements EditTodoDialogFragment.Communicator, SelectDateFragment.Communicator {
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.catty_icon);
+
+        /* SetUp the App */
+        getImages();
 
         /* Toast Things*/
         context = getApplicationContext();
@@ -95,6 +100,16 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
         FragmentManager fm = getSupportFragmentManager();
         editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo);
         editTodoDialogFragment.show(fm, "edit_todo_dialog_fragment");
+    }
+
+    private void getImages() {
+        DataRequests dataRequests = new DataRequests();
+        dataRequests.fetchImageUrlsInBackground("cat", new GetImageUrlsCallback() {
+            @Override
+            public void done(JSONArray returnedUrls) {
+//                Log.v(TAG, returnedUrls);
+            }
+        });
     }
 
     @Override
