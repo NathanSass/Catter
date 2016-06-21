@@ -4,7 +4,7 @@
 
 Submitted by: **Nathan Sass**
 
-Time spent: **27** hours spent in total
+Time spent: **24** hours spent in total
 
 ## User Stories
 
