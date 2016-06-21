@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
+import java.util.Random;
 
 
 public class EditTodoDialogFragment extends DialogFragment implements View.OnClickListener {
@@ -25,7 +29,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
     ImageView catPicture;
     EditText etItemTitle, etAddBday;
-    Button btnSubmitEdits;
+    Button btnSubmitEdits, btnChangePhoto;
 
     Communicator communicator;
 
@@ -68,6 +72,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         etItemTitle = (EditText) view.findViewById(R.id.etItemTitle);
         etAddBday = (EditText) view.findViewById(R.id.etAddBday);
         btnSubmitEdits = (Button) view.findViewById(R.id.btnSubmitEdits);
+        btnChangePhoto = (Button) view.findViewById(R.id.btnChangePhoto);
         catPicture = (ImageView) view.findViewById(R.id.catPicture);
 
         /* Datepicker */
@@ -79,20 +84,21 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
         /* Update UI */
         etItemTitle.append(todo.title);
-        setCatPicture();
+        setCatPicture(todo.imageUrl);
 
         showDate(year, month, day);
 
         showDatepickerOnFocus();
 
         btnSubmitEdits.setOnClickListener(this);
+        btnChangePhoto.setOnClickListener(this);
 
         return view;
     }
 
-    public void setCatPicture() {
+    public void setCatPicture(String url) {
         final DataRequests dataRequests = new DataRequests();
-        dataRequests.fetchImageInBackground(todo.imageUrl, new GetImageCallback() {
+        dataRequests.fetchImageInBackground(url, new GetImageCallback() {
             @Override
             public void done(Bitmap returnedImage) {
                 catPicture.setImageBitmap(returnedImage);
@@ -145,6 +151,37 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
             communicator.onDialogMessage(todo);
             dismiss();
         }
+        else if (v.getId() == R.id.btnChangePhoto ) {
+            changeCatPhoto();
+        }
+    }
+
+    public void changeCatPhoto() {
+        final DataRequests dataRequests = new DataRequests();
+        dataRequests.fetchImageUrlsInBackground("cat", new GetImageUrlsCallback() {
+            @Override
+            public void done(JSONArray returnedUrls) {
+                String imageUrl = null;
+                try {
+                    JSONObject returnedUrl = (JSONObject) returnedUrls.get(new Random().nextInt(returnedUrls.length()));
+
+                    String farmId = returnedUrl.getInt("farm") + "";
+                    String serverId = returnedUrl.getString("server");
+                    String id = returnedUrl.getString("id");
+                    String secret = returnedUrl.getString("secret");
+                    String size = "n";
+
+                    imageUrl = "https://farm" + farmId + ".staticflickr.com/" + serverId + "/" + id + "_" + secret + "_" + size + ".jpg";
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                todo.imageUrl = imageUrl;
+
+                setCatPicture(todo.imageUrl);
+            }
+        });
     }
 
     interface Communicator {
