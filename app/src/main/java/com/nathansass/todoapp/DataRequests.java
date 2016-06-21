@@ -1,5 +1,7 @@
 package com.nathansass.todoapp;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -8,6 +10,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -22,6 +25,10 @@ public class DataRequests {
 
     public void fetchImageUrlsInBackground(String searchTags, GetImageUrlsCallback callback) {
         new FetchImageUrlsAsyncTask(searchTags, callback).execute();
+    }
+
+    public void fetchImageInBackground(String url, GetImageCallback callback) {
+        new FetchImageAsyncTask(url, callback).execute();
     }
 
     public class FetchImageUrlsAsyncTask extends AsyncTask<Void, Void, JSONArray> {
@@ -86,6 +93,34 @@ public class DataRequests {
         protected void onPostExecute(JSONArray resultUrls) {
             super.onPostExecute(resultUrls);
             callback.done(resultUrls);
+        }
+    }
+
+    public class FetchImageAsyncTask extends AsyncTask<Void, Void, Bitmap> {
+        String url;
+        GetImageCallback callback;
+        Bitmap bitmap;
+
+        public FetchImageAsyncTask(String url, GetImageCallback callback) {
+            this.url = url;
+            this.callback = callback;
+        }
+
+
+        @Override
+        protected Bitmap doInBackground(Void... params) {
+            try {
+                bitmap = BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            callback.done(bitmap);
         }
     }
 }

@@ -9,7 +9,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.nathansass.todoapp.EditItemActivity">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,13 +20,22 @@
         android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/darker_gray"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/catpicture"
+        android:src="@drawable/outkast"
+        android:id="@+id/catPicture"/>
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/editItem"
         android:id="@+id/labelEditItem"
-        android:layout_below="@id/tvEditLabel"
+        android:layout_below="@id/catPicture"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 

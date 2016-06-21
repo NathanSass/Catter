@@ -12,4 +12,5 @@
     <string name="addBday">Birthday:</string>
     <string name="birthday">Birthday:</string>
     <string name="editModalTitle">Edit Cat:</string>
+    <string name="catpicture">catPicture</string>
 </resources>

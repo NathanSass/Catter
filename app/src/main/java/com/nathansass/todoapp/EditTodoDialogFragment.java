@@ -2,6 +2,7 @@ package com.nathansass.todoapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.util.Calendar;
 
@@ -20,6 +22,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
     Todo todo;
 
+    ImageView catPicture;
     EditText etItemTitle, etAddBday;
     Button btnSubmitEdits;
 
@@ -38,6 +41,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         args.putString("title", todo.title);
         args.putInt("position", todo.position);
         args.putLong("birthDay", todo.birthDay);
+        args.putString("imageUrl", todo.imageUrl);
         frag.setArguments(args);
         return frag;
     }
@@ -57,11 +61,13 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         todo.title = getArguments().getString("title");
         todo.position = getArguments().getInt("position");
         todo.birthDay = getArguments().getLong("birthDay");
+        todo.imageUrl = getArguments().getString("imageUrl");
 
         /* Get UI elements */
         etItemTitle = (EditText) view.findViewById(R.id.etItemTitle);
         etAddBday = (EditText) view.findViewById(R.id.etAddBday);
         btnSubmitEdits = (Button) view.findViewById(R.id.btnSubmitEdits);
+        catPicture = (ImageView) view.findViewById(R.id.catPicture);
 
         /* Datepicker */
         calendar = Calendar.getInstance();
@@ -72,6 +78,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
         /* Update UI */
         etItemTitle.append(todo.title);
+        setCatPicture();
 
         showDate(year, month, day);
 
@@ -80,6 +87,16 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         btnSubmitEdits.setOnClickListener(this);
 
         return view;
+    }
+
+    public void setCatPicture() {
+        final DataRequests dataRequests = new DataRequests();
+        dataRequests.fetchImageInBackground(todo.imageUrl, new GetImageCallback() {
+            @Override
+            public void done(Bitmap returnedImage) {
+                catPicture.setImageBitmap(returnedImage);
+            }
+        });
     }
 
     public void showDatepickerOnFocus() {

@@ -21,13 +21,17 @@ public class Todo extends Model {
     @Column(name = "Birthday")
     long birthDay;
 
+    @Column(name = "ImageUrl")
+    String imageUrl;
+
     int position;
 
-    public Todo(String title, int position, long birthDay){
+    public Todo(String title, int position, long birthDay, String imageUrl){
         super();
         this.title = title;
         this.position = position;
         this.birthDay = birthDay;
+        this.imageUrl = imageUrl;
 
     }
 
