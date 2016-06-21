@@ -24,35 +24,36 @@
             android:layout_marginBottom="20dp"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/darker_gray"/>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:orientation="vertical"
-                    android:id="@+id/catPictureLayout"
-                    android:layout_width="250dp"
-                    android:layout_below="@+id/tvEditLabel"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="wrap_content">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Change Photo"
-            android:id="@+id/btnChangePhoto"
-            android:textColor="@color/ColorPositiveGreen"
-            android:layout_alignParentRight="true"
-            android:background="@android:color/background_light"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/catpicture"
-            android:src="@drawable/outkast"
-            android:id="@+id/catPicture"/>
 
-    </RelativeLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="vertical"
+                        android:id="@+id/catPictureLayout"
+                        android:layout_width="250dp"
+                        android:layout_below="@+id/tvEditLabel"
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Photo"
+                android:id="@+id/btnChangePhoto"
+                android:textColor="@color/ColorPositiveGreen"
+                android:layout_alignParentRight="true"
+                android:background="@android:color/background_light"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="10dp"
+                android:minHeight="30dp"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/catpicture"
+                android:id="@+id/catPicture"/>
+
+        </RelativeLayout>
 
 
         <TextView

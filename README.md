@@ -4,7 +4,7 @@
 
 Submitted by: **Nathan Sass**
 
-Time spent: **26** hours spent in total
+Time spent: **27** hours spent in total
 
 ## User Stories
 
@@ -33,7 +33,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
-![](http://i.giphy.com/3o72FiKv7pKzmZDz3y.gif)
+![](http://i.giphy.com/26BRHr5i3c5Lh0IVi.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
