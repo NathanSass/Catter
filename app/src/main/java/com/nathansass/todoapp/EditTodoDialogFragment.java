@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import java.util.Calendar;
 
 
 public class EditTodoDialogFragment extends DialogFragment implements View.OnClickListener {
-
+    public static final String TAG = EditTodoDialogFragment.class.getSimpleName();
     Context context;
     int duration;
 

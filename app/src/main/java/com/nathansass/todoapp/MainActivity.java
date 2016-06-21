@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
                 }
 
                 todo.imageUrl = imageUrl;
-                Log.v(TAG, imageUrl);
+                todo.save();
             }
         });
     }
@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
         Todo todo = todoArr.get(newTodo.position);
         todo.title = newTodo.title;
         todo.birthDay = newTodo.birthDay;
+        todo.imageUrl = newTodo.imageUrl;
 
         todoArr.set(newTodo.position, todo);
         todoAdapter.notifyDataSetChanged();
