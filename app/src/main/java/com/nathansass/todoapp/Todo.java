@@ -1,5 +1,7 @@
 package com.nathansass.todoapp;
 
+import android.graphics.Bitmap;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -26,12 +28,15 @@ public class Todo extends Model {
 
     int position;
 
-    public Todo(String title, int position, long birthDay, String imageUrl){
+    Bitmap catPic;
+
+    public Todo(String title, int position, long birthDay, String imageUrl, Bitmap catPic){
         super();
         this.title = title;
         this.position = position;
         this.birthDay = birthDay;
         this.imageUrl = imageUrl;
+        this.catPic = catPic;
 
     }
 
