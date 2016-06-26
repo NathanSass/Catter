@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,6 +67,8 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_todo_dialog, container);
 
+        context = getContext();
+
         int position = getArguments().getInt("position");
 
         todo = TodoList.get().getTodos().get(position);
@@ -106,14 +108,16 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         sbDisposition.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Toast.makeText(getActivity(), "Progress: " + progress, Toast.LENGTH_SHORT).show();
                 String mood = "";
                 if (progress == 0) {
-                    mood = "Mean";
+                    mood = context.getString(R.string.lowMood);
+                    tvDisposition.setTextColor(ContextCompat.getColor(context, R.color.lowMood));
                 } else if (progress == 1) {
-                    mood = "Indifferent";
+                    mood = context.getString(R.string.mediumMood);
+                    tvDisposition.setTextColor(ContextCompat.getColor(context, R.color.mediumMood));
                 } else if ( progress ==2 ) {
-                    mood = "Friendly";
+                    mood = context.getString(R.string.highMood);
+                    tvDisposition.setTextColor(ContextCompat.getColor(context, R.color.highMood));
                 }
 
                 tvDisposition.setText(mood);

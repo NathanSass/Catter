@@ -13,4 +13,8 @@
     <string name="birthday">Birthday:</string>
     <string name="editModalTitle">Edit Cat:</string>
     <string name="catpicture">catPicture</string>
+
+    <string name="lowMood">Angry</string>
+    <string name="mediumMood">Indifferent</string>
+    <string name="highMood">Friendly</string>
 </resources>

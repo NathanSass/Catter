@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#59309f</color>
     <color name="colorAccent">#4063ff</color>
     <color name="ColorPositiveGreen">#50e3c2</color>
+
+    <color name="lowMood">@android:color/holo_red_light</color>
+    <color name="mediumMood">@android:color/holo_orange_light</color>
+    <color name="highMood">@android:color/holo_green_light</color>
 </resources>
