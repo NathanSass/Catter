@@ -39,6 +39,14 @@ public class SuperList {
         allList.remove(todo);
     }
 
+    public ArrayList<Todo> getTodos(){
+        return allList;
+    }
+
+    public Todo getTodo(int position) {
+        return allList.get(position);
+    }
+
     public int getTodoCount() {
         return allList.size();
     }

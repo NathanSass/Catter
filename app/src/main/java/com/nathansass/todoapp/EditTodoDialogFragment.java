@@ -43,10 +43,9 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
     public static EditTodoDialogFragment newInstance(Todo todo) {
         EditTodoDialogFragment frag = new EditTodoDialogFragment();
         Bundle args = new Bundle();
-        args.putString("title", todo.title);
+
         args.putInt("position", todo.position);
-        args.putLong("birthDay", todo.birthDay);
-        args.putString("imageUrl", todo.imageUrl);
+
         frag.setArguments(args);
         return frag;
     }
@@ -62,11 +61,9 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_todo_dialog, container);
 
-        todo = new Todo();
-        todo.title = getArguments().getString("title");
-        todo.position = getArguments().getInt("position");
-        todo.birthDay = getArguments().getLong("birthDay");
-        todo.imageUrl = getArguments().getString("imageUrl");
+        int position = getArguments().getInt("position");
+
+        todo = TodoList.get().getTodos().get(position);
 
         /* Get UI elements */
         etItemTitle = (EditText) view.findViewById(R.id.etItemTitle);

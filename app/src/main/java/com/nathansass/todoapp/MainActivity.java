@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
     Context context;
     int duration;
     CustomTodoAdapter todoAdapter;
-    ArrayList<Todo> todoArr;
     ListView lvItems;
     EditText etEditText;
 
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
 
         populateArrayItems();
 
-        todoAdapter = new CustomTodoAdapter(this, todoArr);
+        todoAdapter = new CustomTodoAdapter(this, TodoList.get().getTodos());
         lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(todoAdapter);
 
@@ -59,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Todo todo = todoArr.get(position);
-                todoArr.remove(position);
+                Todo todo = TodoList.get().getTodo(position);
+                TodoList.get().getTodos().remove(position);
                 todoAdapter.notifyDataSetChanged();
                 todo.delete();
                 return true;
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Todo todo = todoArr.get(position);
+                Todo todo = TodoList.get().getTodos().get(position);
                 todo.position = position;
                 showTodoEditDialog(todo);
 
@@ -80,7 +79,8 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
     }
 
     public void populateArrayItems() {
-        todoArr = (ArrayList<Todo>) Todo.getAll();
+
+        TodoList.get().set((ArrayList) Todo.getAll());
     }
 
     public void onAddItem(View view) {
@@ -131,16 +131,11 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
     }
 
     @Override
-    public void onDialogMessage(Todo newTodo) {
-        Todo todo = todoArr.get(newTodo.position);
-        todo.title = newTodo.title;
-        todo.birthDay = newTodo.birthDay;
-        todo.imageUrl = newTodo.imageUrl;
-
-        todoArr.set(newTodo.position, todo);
-        todoAdapter.notifyDataSetChanged();
+    public void onDialogMessage(Todo todo) {
 
         todo.save();
+        todoAdapter.notifyDataSetChanged();
+
     }
 
     @Override
