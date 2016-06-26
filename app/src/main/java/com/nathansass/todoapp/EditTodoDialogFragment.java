@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +33,9 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
     ImageView catPicture;
     EditText etItemTitle, etAddBday;
     Button btnSubmitEdits, btnChangePhoto;
+    TextView tvDisposition;
+
+    SeekBar sbDisposition;
 
     Communicator communicator;
 
@@ -71,6 +77,8 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         btnSubmitEdits = (Button) view.findViewById(R.id.btnSubmitEdits);
         btnChangePhoto = (Button) view.findViewById(R.id.btnChangePhoto);
         catPicture = (ImageView) view.findViewById(R.id.catPicture);
+        sbDisposition = (SeekBar) view.findViewById(R.id.sbDisposition);
+        tvDisposition = (TextView) view.findViewById(R.id.tvDisposition);
 
         /* Datepicker */
         calendar = Calendar.getInstance();
@@ -86,11 +94,41 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         showDate(year, month, day);
 
         showDatepickerOnFocus();
+        setSeekBarListener();
 
         btnSubmitEdits.setOnClickListener(this);
         btnChangePhoto.setOnClickListener(this);
 
         return view;
+    }
+
+    public void  setSeekBarListener() {
+        sbDisposition.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Toast.makeText(getActivity(), "Progress: " + progress, Toast.LENGTH_SHORT).show();
+                String mood = "";
+                if (progress == 0) {
+                    mood = "Mean";
+                } else if (progress == 1) {
+                    mood = "Indifferent";
+                } else if ( progress ==2 ) {
+                    mood = "Friendly";
+                }
+
+                tvDisposition.setText(mood);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     public void showDatepickerOnFocus() {
@@ -137,8 +175,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
             communicator.onDialogMessage(todo);
             dismiss();
-        }
-        else if (v.getId() == R.id.btnChangePhoto ) {
+        } else if (v.getId() == R.id.btnChangePhoto ) {
             changeCatPhoto();
         }
     }

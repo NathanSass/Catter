@@ -65,7 +65,6 @@
             android:layout_below="@id/catPictureLayout"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"/>
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,6 +75,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:inputType="text"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,14 +95,61 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:inputType="text"
-            android:layout_marginBottom="40dp"/>
+            />
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:id="@+id/dispositionWidget"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/etAddBday"
+                      android:layout_marginBottom="40dp"
+                      android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvDisposition"
+                android:text="Indifferent"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <SeekBar
+                android:id="@+id/sbDisposition"
+                android:progress="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="2"/>
+
+        </LinearLayout>
+
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+            <!--android:text="Disposition"-->
+            <!--android:id="@+id/labelDisposition"-->
+            <!--android:layout_below="@id/dispositionWidget"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"/>-->
+        <!--<EditText-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/etItemDisposition"-->
+            <!--android:layout_below="@+id/labelDisposition"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginBottom="40dp"-->
+            <!--android:inputType="text"/>-->
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/update"
             android:id="@+id/btnSubmitEdits"
-            android:layout_below="@+id/etAddBday"
+            android:layout_below="@+id/dispositionWidget"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/background_light"
             android:background="@color/ColorPositiveGreen"/>
