@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_below="@+id/etAddBday"
-                android:text="Disposition:"
+                android:text="@string/Mood"
                 android:id="@+id/tvMoodLabel"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"/>

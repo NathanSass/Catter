@@ -17,4 +17,5 @@
     <string name="lowMood">Angry</string>
     <string name="mediumMood">Indifferent</string>
     <string name="highMood">Friendly</string>
+    <string name="Mood">Mood:</string>
 </resources>
