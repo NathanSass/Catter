@@ -109,19 +109,21 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String mood = "";
+                int color = 1;
                 if (progress == 0) {
                     mood = context.getString(R.string.lowMood);
-                    tvDisposition.setTextColor(ContextCompat.getColor(context, R.color.lowMood));
+                    color = ContextCompat.getColor(context, R.color.lowMood);
                 } else if (progress == 1) {
                     mood = context.getString(R.string.mediumMood);
-                    tvDisposition.setTextColor(ContextCompat.getColor(context, R.color.mediumMood));
+                   color = ContextCompat.getColor(context, R.color.mediumMood);
                 } else if ( progress ==2 ) {
                     mood = context.getString(R.string.highMood);
-                    tvDisposition.setTextColor(ContextCompat.getColor(context, R.color.highMood));
+                    color = ContextCompat.getColor(context, R.color.highMood);
                 }
 
                 todo.personality = progress;
                 tvDisposition.setText(mood);
+                tvDisposition.setBackgroundColor(color);
             }
 
             @Override

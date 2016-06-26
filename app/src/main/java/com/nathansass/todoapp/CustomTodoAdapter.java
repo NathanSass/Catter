@@ -69,7 +69,7 @@ public class CustomTodoAdapter extends ArrayAdapter<Todo> {
             color = ContextCompat.getColor(context, R.color.highMood);
         }
 
-        tvDisposition.setTextColor(color);
+        tvDisposition.setBackgroundColor(color);
         tvDisposition.setText(mood);
 
         return convertView;
