@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
             Todo newTodo = new Todo();
             newTodo.title = todoTitle;
             newTodo.birthDay = System.currentTimeMillis();
+            newTodo.personality = 1;
             addImageUrl(newTodo);
             newTodo.save();
             todoAdapter.add(newTodo);

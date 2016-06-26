@@ -120,6 +120,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
                     tvDisposition.setTextColor(ContextCompat.getColor(context, R.color.highMood));
                 }
 
+                todo.personality = progress;
                 tvDisposition.setText(mood);
             }
 
