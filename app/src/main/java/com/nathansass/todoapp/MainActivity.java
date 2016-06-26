@@ -1,6 +1,7 @@
 package com.nathansass.todoapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
     public void populateArrayItems() {
 
         TodoList.get().set((ArrayList) Todo.getAll());
+        TodoList.get().getBitmapImages();
     }
 
     public void onAddItem(View view) {
@@ -125,6 +127,12 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
                 }
 
                 todo.imageUrl = imageUrl;
+                dataRequests.fetchImageInBackground(imageUrl, new GetImageCallback() {
+                    @Override
+                    public void done(Bitmap returnedImage) {
+                        todo.catPic = returnedImage;
+                    }
+                });
                 todo.save();
             }
         });

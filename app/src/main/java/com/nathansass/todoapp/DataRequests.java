@@ -48,7 +48,7 @@ public class DataRequests {
 
             String urlStr = "https://api.flickr.com/services/rest/?method=flickr.photos.search" +
                     "&api_key=" + apiKey +
-                    "&tags=" + "cat,cute,meowv" +
+                    "&tags=" + "cat" +
                     "&safe_search=1&per_page=10&format=json&nojsoncallback=1";
 
 //            https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=53f0467d174b9080cbd9e2dd871e60d0&tags=cat,cute"&safe_search=1&per_page=10&format=json&nojsoncallback=1";

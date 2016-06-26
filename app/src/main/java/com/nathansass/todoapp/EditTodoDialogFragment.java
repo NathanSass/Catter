@@ -81,7 +81,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
         /* Update UI */
         etItemTitle.append(todo.title);
-        setCatPicture(todo.imageUrl);
+        catPicture.setImageBitmap(todo.catPic);
 
         showDate(year, month, day);
 
@@ -91,16 +91,6 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         btnChangePhoto.setOnClickListener(this);
 
         return view;
-    }
-
-    public void setCatPicture(String url) {
-        final DataRequests dataRequests = new DataRequests();
-        dataRequests.fetchImageInBackground(url, new GetImageCallback() {
-            @Override
-            public void done(Bitmap returnedImage) {
-                catPicture.setImageBitmap(returnedImage);
-            }
-        });
     }
 
     public void showDatepickerOnFocus() {
@@ -176,7 +166,13 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
                 todo.imageUrl = imageUrl;
 
-                setCatPicture(todo.imageUrl);
+                dataRequests.fetchImageInBackground(imageUrl, new GetImageCallback() {
+                    @Override
+                    public void done(Bitmap returnedImage) {
+                        todo.catPic = returnedImage;
+                        catPicture.setImageBitmap(returnedImage);
+                    }
+                });
             }
         });
     }
