@@ -57,14 +57,10 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/editItem"
             android:id="@+id/labelEditItem"
-            android:layout_below="@id/catPictureLayout"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            style="@style/editLabel"
+            android:text="@string/editItem"
+            android:layout_below="@id/catPictureLayout"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,14 +73,10 @@
             android:inputType="text"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_below="@+id/etItemTitle"
-            android:text="@string/addBday"
             android:id="@+id/tvAddBirthday"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            style="@style/editLabel"
+            android:layout_below="@+id/etItemTitle"
+            android:text="@string/addBday"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,8 +86,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:inputType="text"
-            />
+            android:inputType="text"/>
 
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -106,14 +97,10 @@
                       android:layout_marginBottom="40dp"
                       android:orientation="vertical">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_below="@+id/etAddBday"
-                android:text="@string/Mood"
                 android:id="@+id/tvMoodLabel"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+                style="@style/editLabel"
+                android:layout_below="@+id/etAddBday"
+                android:text="@string/Mood"/>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                           android:layout_width="match_parent"
@@ -123,16 +110,8 @@
                           android:layout_marginBottom="10dp">
                 <TextView
                     android:id="@+id/tvDisposition"
-                    android:text="@string/mediumMood"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/background_light"
-                    android:background="@drawable/label_background"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="6dp"
-                    android:paddingRight="6dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"/>
+                    style="@style/moodLabel"
+                    android:layout_marginLeft="10dp"/>
              </LinearLayout>
 
             <SeekBar
