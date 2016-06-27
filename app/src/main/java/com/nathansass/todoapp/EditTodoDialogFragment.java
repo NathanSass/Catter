@@ -15,12 +15,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Calendar;
-import java.util.Random;
 
 
 public class EditTodoDialogFragment extends DialogFragment implements View.OnClickListener {
@@ -189,34 +184,12 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
     public void changeCatPhoto() {
         final DataRequests dataRequests = new DataRequests();
-        dataRequests.fetchImageUrlsInBackground("cat", new GetImageUrlsCallback() {
+
+        dataRequests.fetchUrlThenImgInBackground(todo, new GetImageCallback() {
             @Override
-            public void done(JSONArray returnedUrls) {
-                String imageUrl = null;
-                try {
-                    JSONObject returnedUrl = (JSONObject) returnedUrls.get(new Random().nextInt(returnedUrls.length()));
-
-                    String farmId = returnedUrl.getInt("farm") + "";
-                    String serverId = returnedUrl.getString("server");
-                    String id = returnedUrl.getString("id");
-                    String secret = returnedUrl.getString("secret");
-                    String size = "n";
-
-                    imageUrl = "https://farm" + farmId + ".staticflickr.com/" + serverId + "/" + id + "_" + secret + "_" + size + ".jpg";
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                todo.imageUrl = imageUrl;
-
-                dataRequests.fetchImageInBackground(imageUrl, new GetImageCallback() {
-                    @Override
-                    public void done(Bitmap returnedImage) {
-                        todo.catPic = returnedImage;
-                        catPicture.setImageBitmap(returnedImage);
-                    }
-                });
+            public void done(Bitmap returnedImage) {
+                todo.catPic = returnedImage;
+                catPicture.setImageBitmap(returnedImage);
             }
         });
     }

@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 /**
  * Created by nathansass on 6/20/16.
@@ -29,6 +30,38 @@ public class DataRequests {
 
     public void fetchImageInBackground(String url, GetImageCallback callback) {
         new FetchImageAsyncTask(url, callback).execute();
+    }
+
+    public void fetchUrlThenImgInBackground(final Todo todo, final GetImageCallback callback ) {
+        fetchImageUrlsInBackground("cat", new GetImageUrlsCallback() {
+            @Override
+            public void done(JSONArray returnedUrls) {
+                String imageUrl = null;
+                try {
+                    JSONObject returnedUrl = (JSONObject) returnedUrls.get(new Random().nextInt(returnedUrls.length()));
+
+                    String farmId = returnedUrl.getInt("farm") + "";
+                    String serverId = returnedUrl.getString("server");
+                    String id = returnedUrl.getString("id");
+                    String secret = returnedUrl.getString("secret");
+                    String size = "n";
+
+                    imageUrl = "https://farm" + farmId + ".staticflickr.com/" + serverId + "/" + id + "_" + secret + "_" + size + ".jpg";
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+               todo.imageUrl = imageUrl;
+
+                fetchImageInBackground(imageUrl, new GetImageCallback() {
+                    @Override
+                    public void done(Bitmap returnedImage) {
+                        callback.done(returnedImage);
+                    }
+                });
+            }
+        });
     }
 
     public class FetchImageUrlsAsyncTask extends AsyncTask<Void, Void, JSONArray> {

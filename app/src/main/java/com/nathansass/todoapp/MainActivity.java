@@ -12,12 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements EditTodoDialogFragment.Communicator, SelectDateFragment.Communicator {
 
@@ -108,32 +103,10 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
 
     public void addImageUrl(final Todo todo) {
         final DataRequests dataRequests = new DataRequests();
-        dataRequests.fetchImageUrlsInBackground("cat", new GetImageUrlsCallback() {
+        dataRequests.fetchUrlThenImgInBackground(todo, new GetImageCallback() {
             @Override
-            public void done(JSONArray returnedUrls) {
-                String imageUrl = null;
-                try {
-                    JSONObject returnedUrl = (JSONObject) returnedUrls.get(new Random().nextInt(returnedUrls.length()));
-
-                    String farmId = returnedUrl.getInt("farm") + "";
-                    String serverId = returnedUrl.getString("server");
-                    String id = returnedUrl.getString("id");
-                    String secret = returnedUrl.getString("secret");
-                    String size = "n";
-
-                    imageUrl = "https://farm" + farmId + ".staticflickr.com/" + serverId + "/" + id + "_" + secret + "_" + size + ".jpg";
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                todo.imageUrl = imageUrl;
-                dataRequests.fetchImageInBackground(imageUrl, new GetImageCallback() {
-                    @Override
-                    public void done(Bitmap returnedImage) {
-                        todo.catPic = returnedImage;
-                    }
-                });
+            public void done(Bitmap returnedImage) {
+                todo.catPic = returnedImage;
                 todo.save();
             }
         });
