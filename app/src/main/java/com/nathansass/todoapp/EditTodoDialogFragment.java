@@ -180,8 +180,10 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
             communicator.onDialogMessage(todo);
             dismiss();
         } else if (v.getId() == R.id.btnChangePhoto ) {
+
             changeCatPhoto();
         } else if (v.getId() == R.id.btnDelete ) {
+
             deleteTodo();
         }
     }
