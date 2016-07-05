@@ -27,7 +27,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
     ImageView catPicture;
     EditText etItemTitle, etAddBday;
-    Button btnSubmitEdits, btnChangePhoto;
+    Button btnSubmitEdits, btnChangePhoto, btnDelete;
     TextView tvDisposition;
 
     SeekBar sbDisposition;
@@ -76,6 +76,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
         catPicture = (ImageView) view.findViewById(R.id.catPicture);
         sbDisposition = (SeekBar) view.findViewById(R.id.sbDisposition);
         tvDisposition = (TextView) view.findViewById(R.id.tvDisposition);
+        btnDelete = (Button) view.findViewById(R.id.btnDelete);
 
         /* Datepicker */
         calendar = Calendar.getInstance();
@@ -95,6 +96,7 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
 
         btnSubmitEdits.setOnClickListener(this);
         btnChangePhoto.setOnClickListener(this);
+        btnDelete.setOnClickListener(this);
 
         return view;
     }
@@ -179,7 +181,16 @@ public class EditTodoDialogFragment extends DialogFragment implements View.OnCli
             dismiss();
         } else if (v.getId() == R.id.btnChangePhoto ) {
             changeCatPhoto();
+        } else if (v.getId() == R.id.btnDelete ) {
+            deleteTodo();
         }
+    }
+
+    public void deleteTodo() {
+        TodoList.get().getTodos().remove(todo.position);
+        todo.delete();
+        communicator.onDialogMessage(todo);
+        dismiss();
     }
 
     public void changeCatPhoto() {

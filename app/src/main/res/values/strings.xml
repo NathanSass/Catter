@@ -18,4 +18,5 @@
     <string name="mediumMood">Indifferent</string>
     <string name="highMood">Friendly</string>
     <string name="Mood">Mood:</string>
+    <string name="delete">Delete</string>
 </resources>

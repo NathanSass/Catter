@@ -123,16 +123,35 @@
 
         </LinearLayout>
 
-
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/update"
-            android:id="@+id/btnSubmitEdits"
+            android:orientation="horizontal"
             android:layout_below="@+id/dispositionWidget"
-            android:layout_centerHorizontal="true"
-            android:textColor="@android:color/background_light"
-            android:background="@color/ColorPositiveGreen"/>
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update"
+                android:id="@+id/btnSubmitEdits"
+                android:layout_weight="1.0"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/background_light"
+                android:background="@color/ColorPositiveGreen"
+                android:layout_marginRight="10dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                android:layout_weight="1.0"
+                android:id="@+id/btnDelete"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/background_light"
+                android:background="@color/lowMood"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 </ScrollView>
